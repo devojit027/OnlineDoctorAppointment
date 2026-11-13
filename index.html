@@ -253,7 +253,7 @@ footer
         <i class="bi bi-person"></i> Patient Login
       </a>
       <a class="nav-drawer-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">
-        <i class="bi bi-briefcase-medical"></i> <img src="c:\Users\DEVOJIT SAHA\Downloads\stethoscope.png" alt="icon" height="30px" width="30px"> Doctor Login
+        <i class="bi bi-briefcase-medical"></i> <img src="stethoscope.png" alt="icon" height="30px" width="30px"> Doctor Login
       </a>
     </div>
     <div class="p-3 border rounded-4 bg-light mt-4" class="nav-drawer-link">
@@ -401,7 +401,7 @@ footer
                 <small class="text-muted d-block" style="font-size:11px;">CONSULTATION FEE</small>
                 <span class="fs-5 fw-bold text-success">₹500</span>
               </div>
-              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
+              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal" onclick="openLoginPopup()">Book Visit</button>
             </div>
           </div>
         </div>
@@ -423,7 +423,7 @@ footer
                 <small class="text-muted d-block" style="font-size:11px;">CONSULTATION FEE</small>
                 <span class="fs-5 fw-bold text-success">₹800</span>
               </div>
-              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
+              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal" onclick="openLoginPopup()">Book Visit</button>
             </div>
           </div>
         </div>
@@ -445,7 +445,7 @@ footer
                 <small class="text-muted d-block" style="font-size:11px;">CONSULTATION FEE</small>
                 <span class="fs-5 fw-bold text-success">₹700</span>
               </div>
-              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
+              <button class="btn-main px-4 py-2" onclick="openLoginPopup()" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
             </div>
           </div>
         </div>
@@ -625,12 +625,53 @@ footer
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+// Automatically show Login popup after 5 seconds
+document.addEventListener("DOMContentLoaded", function () {
+
+   const loginModalElement = document.getElementById("registerModal");
+
+    const loginModal = bootstrap.Modal.getOrCreateInstance(
+        loginModalElement
+    );
+
+    // First popup after 5 seconds
+    setTimeout(function () {
+
+        if (!document.querySelector(".modal.show")) {
+            loginModal.show();
+        }
+
+    }, 5000);
+
+    // Show again every 60 seconds
+    setInterval(function () {
+
+        if (!document.querySelector(".modal.show")) {
+            loginModal.show();
+        }
+
+    }, 5000);
+
+});
+
 function showTextarea() {
   const selected = document.getElementById("options").value;
 
   document.getElementById("otherField").style.display =
     selected === "Others" ? "block" : "none";
 }
+
+function openLoginPopup() {
+    const modalElement = document.getElementById("authModal");
+
+    const loginModal = bootstrap.Modal.getOrCreateInstance(
+        modalElement
+    );
+
+    loginModal.show();
+}
+
 </script>
 </body>
 </html>
