@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarePoint | Healthcare Platform</title>
+
+<!-- Bootstrap 5 & Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #0284c7;
+  --primary-hover: #0369a1;
+  --primary-glow: rgba(2, 132, 199, 0.25);
+  --light-bg: #f8fafc;
+  --light-card: #ffffff;
+  --light-text: #0f172a;
+  --muted: #64748b;
+  --border-light: #e2e8f0;
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.logo-brand {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.hamburger-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.hamburger-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: 0 8px 20px var(--primary-glow);
+}
+
+/* OFFCANVAS NAV POPUP */
+.offcanvas {
+  border-radius: 24px 0 0 24px;
+  border: none;
+  box-shadow: -15px 0 40px rgba(0,0,0,0.25);
+}
+.offcanvas-header {
+  border-bottom: 1px solid var(--border-light);
+  padding: 24px;
+}
+
+.nav-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  color: var(--light-text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  transition: var(--transition);
+  background: transparent;
+}
+.nav-drawer-link i {
+  font-size: 22px;
+  color: var(--primary);
+  transition: var(--transition);
+}
+.nav-drawer-link:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: white !important;
+  transform: translateX(8px);
+  box-shadow: 0 8px 20px var(--primary-glow);
+}
+.nav-drawer-link:hover i { color: white; transform: scale(1.2); }
+
+/* TOP CAROUSEL SLIDER */
+.top-slider-container {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+  margin-top: 20px;
+}
+.carousel-item img {
+  height: 480px;
+  object-fit: cover;
+  filter: brightness(0.75);
+}
+.carousel-caption {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 30px;
+  bottom: 40px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* TYPING TITLE & BANNER */
+.typing-wrapper {
+  text-align: center;
+  padding: 35px 0 15px;
+}
+.typing-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4.5vw, 54px);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* BUTTONS & CARDS */
+.btn-main {
+  background: linear-gradient(135deg, var(--primary), #0284c7);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px var(--primary-glow);
+  transition: var(--transition);
+}
+.btn-main:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(2, 132, 199, 0.4);
+  color: white;
+}
+
+.hero-search-box {
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-light);
+}
+.hero-search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  background: transparent;
+}
+
+.specialty-card, .doctor-card {
+  background: var(--light-card);
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  padding: 24px;
+  transition: var(--transition);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+  height: 100%;
+}
+.specialty-card:hover, .doctor-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(2, 132, 199, 0.15);
+}
+
+.doctor-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  display: grid;
+  place-items: center;
+  font-size: 45px;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+footer {
+  background: #09121e;
+  color: #94a3b8;
+  padding: 70px 0 40px;
+  border-top: 1px solid #1e293b;
+}
+footer 
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar sticky-top py-3">
+  <div class="container">
+    <a class="logo-brand d-flex align-items-center gap-2" href="#">
+      <i class="bi bi-heart-pulse-fill text-primary"></i> CarePoint
+    </a>
+    <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Register Now</button>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#authModal">Login</button>      
+        <button class="hamburger-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#navDrawer" aria-label="Toggle Navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      
+    </div>
+  </div>
+</nav>
+
+<!-- OFFCANVAS HAMBURGER POPUP MENU -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="navDrawer">
+  <div class="offcanvas-header">
+    <h5 class="fw-bold m-0 d-flex align-items-center gap-2" style="color: var(--primary);">
+      <i class="bi bi-hospital"></i> Menu Navigation
+    </h5>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
+    <div class="d-flex flex-column gap-2">
+      <a class="nav-drawer-link" href="#specialties">
+        <i class="bi bi-journal-medical"></i> Medical Specialties
+      </a>
+      <a class="nav-drawer-link" href="#doctors">
+        <i class="bi bi-person-badge"></i> Find Doctors
+      </a>
+      <a class="nav-drawer-link" href="#ai">
+        <i class="bi bi-cpu"></i> AI Doctor Finder
+      </a>
+      <hr class="my-3 text-muted">
+      <a class="nav-drawer-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">
+        <i class="bi bi-person"></i> Patient Login
+      </a>
+      <a class="nav-drawer-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal">
+        <i class="bi bi-briefcase-medical"></i> <img src="c:\Users\DEVOJIT SAHA\Downloads\stethoscope.png" alt="icon" height="30px" width="30px"> Doctor Login
+      </a>
+    </div>
+    <div class="p-3 border rounded-4 bg-light mt-4" class="nav-drawer-link">
+      <label class="form-label fw-bold mb-2 small text-muted d-block">QUICK SUPPORT</label>
+      <p class="small text-muted mb-0"><i class="bi bi-telephone-fill text-primary me-1"></i> +91 (0123456789) care</p>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN HOMEPAGE CONTENT -->
+<main id="homepage">
+  <div class="container">
+    
+    <!-- TOP CAROUSEL SLIDER -->
+    <div class="top-slider-container">
+      <div id="clinicCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#clinicCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#clinicCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#clinicCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="4000">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Clinic Interior">
+            <div class="carousel-caption">
+              <h3 class="fw-bold text-white">World-Class Healthcare Facilities</h3>
+              <p class="mb-0 text-white-50">Equipped with cutting-edge medical technologies and compassionate specialists.</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="4000">
+            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Medical Team">
+            <div class="carousel-caption">
+              <h3 class="fw-bold text-white">Expert Doctors & Specialists</h3>
+              <p class="mb-0 text-white-50">Connecting you directly with experienced healthcare professionals.</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="4000">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Patient Care">
+            <div class="carousel-caption">
+              <h3 class="fw-bold text-white">Seamless Online Appointments</h3>
+              <p class="mb-0 text-white-50">Instant doctor booking, real-time consultation tracking, and smart AI guidance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TITLE BANNER -->
+    <div class="typing-wrapper">
+      <div class="typing-title">Comprehensive Healthcare at Your Fingertips.</div>
+      <p class="text-muted fs-5 mt-2">Find trusted clinic doctors and reserve your consultation in minutes.</p>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="row justify-content-center my-4">
+      <div class="col-lg-8">
+        <div class="hero-search-box">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-8">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-search text-primary fs-4 ms-2 me-3"></i>
+                <input placeholder="Search doctor name or medical specialty...">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <button class="btn-main w-100 py-3">
+                Search Doctor <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIALTIES SECTION -->
+    <section class="py-5" id="specialties">
+      <div class="mb-4">
+        <h2 class="fw-bold text-center">Browse Healthcare Specialties</h2>
+        <p class="text-muted text-center">Select a clinical area to filter specialized doctors.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="specialty-card text-center">
+            <div class="fs-1 mb-2">🩺</div>
+            <h6 class="fw-bold mb-0">General Physician</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="specialty-card text-center">
+            <div class="fs-1 mb-2">❤️</div>
+            <h6 class="fw-bold mb-0">Cardiologist</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="specialty-card text-center">
+            <div class="fs-1 mb-2">🧴</div>
+            <h6 class="fw-bold mb-0">Dermatologist</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="specialty-card text-center">
+            <div class="fs-1 mb-2">🦴</div>
+            <h6 class="fw-bold mb-0">Orthopedic</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="specialty-card text-center">
+            <div class="fs-1 mb-2">👶</div>
+            <h6 class="fw-bold mb-0">Pediatrician</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="specialty-card text-center">
+            <div class="fs-1 mb-2">🌸</div>
+            <h6 class="fw-bold mb-0">Gynecologist</h6>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCTORS LIST -->
+    <section class="py-5" id="doctors">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="fw-bold">Our Medical Specialists</h2>
+          <p class="text-muted">Verified doctors available for consultation</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="doctor-card d-flex flex-column justify-content-between">
+            <div>
+              <div class="doctor-avatar">👩‍⚕️</div>
+              <div class="text-center mb-3">
+                <h5 class="fw-bold mb-1">Dr. Ananya Sen</h5>
+                <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-1 rounded-pill">General Physician</span>
+              </div>
+              <div class="small text-muted text-center mb-3">
+                MBBS, MD • 8 Years Exp.<br>
+                <span class="text-warning fw-bold"><i class="bi bi-star-fill"></i> 4.8</span>
+              </div>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <small class="text-muted d-block" style="font-size:11px;">CONSULTATION FEE</small>
+                <span class="fs-5 fw-bold text-success">₹500</span>
+              </div>
+              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="doctor-card d-flex flex-column justify-content-between">
+            <div>
+              <div class="doctor-avatar">👨‍⚕️</div>
+              <div class="text-center mb-3">
+                <h5 class="fw-bold mb-1">Dr. Rohan Das</h5>
+                <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-1 rounded-pill">Cardiologist</span>
+              </div>
+              <div class="small text-muted text-center mb-3">
+                MBBS, MD Cardiology • 12 Years Exp.<br>
+                <span class="text-warning fw-bold"><i class="bi bi-star-fill"></i> 4.9</span>
+              </div>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <small class="text-muted d-block" style="font-size:11px;">CONSULTATION FEE</small>
+                <span class="fs-5 fw-bold text-success">₹800</span>
+              </div>
+              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="doctor-card d-flex flex-column justify-content-between">
+            <div>
+              <div class="doctor-avatar">👩🏻‍⚕️</div>
+              <div class="text-center mb-3">
+                <h5 class="fw-bold mb-1">Dr. Priya Mukherjee</h5>
+                <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-1 rounded-pill">Dermatologist</span>
+              </div>
+              <div class="small text-muted text-center mb-3">
+                MBBS, MD Dermatology • 7 Years Exp.<br>
+                <span class="text-warning fw-bold"><i class="bi bi-star-fill"></i> 4.8</span>
+              </div>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <small class="text-muted d-block" style="font-size:11px;">CONSULTATION FEE</small>
+                <span class="fs-5 fw-bold text-success">₹700</span>
+              </div>
+              <button class="btn-main px-4 py-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Visit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI RECOMMENDATION SECTION -->
+    <section class="py-5" id="ai">
+      <div class="card p-5 border-0 shadow-lg" style="background: linear-gradient(135deg, rgba(2,132,199,0.08), rgba(16,185,129,0.08)); border-radius: 28px;">
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <span class="badge bg-primary px-3 py-2 rounded-pill fw-bold mb-3">AI HEALTH ASSISTANT</span>
+            <h2 class="fw-bold display-6 mb-3">Unsure which doctor to consult?</h2>
+            <p class="text-muted fs-5 mb-4">Select your health concern or symptom category below. Our AI assistant will instantly recommend the right clinical specialist.</p>
+          </div>
+          <div class="col-lg-5">
+            <select class="form-select py-3 mb-3 shadow-sm border-0" style="border-radius:14px" id="options" onchange="showTextarea()">
+              <option value="">Select your medical concern</option>
+              <option value="General Physician">Fever, Flu, Fatigue, Cold</option>
+              <option value="Cardiologist">Chest discomfort, Blood Pressure</option>
+              <option value="Dermatologist">Skin rashes, Hair loss, Acne</option>
+              <option value="Others">Others</option>
+            </select>
+            <div id="otherField" style="display:none;">
+                <textarea
+                  id="otherText"
+                  placeholder="Please specify..."
+                  rows="2" cols="40">
+                </textarea>
+            </div>
+            <button class="btn-main w-100 py-3">
+              <i class="bi bi-magic me-2"></i> Find Recommended Doctor
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <h3 class="fw-bold text-white mb-3"><i class="bi bi-heart-pulse-fill text-primary"></i> CarePoint</h3>
+        <p>Providing seamless healthcare access, instant doctor appointments, patient management, and comprehensive clinical analytics.</p>
+      </div>
+      <div class="col-lg-3">
+        <h6 class="text-white fw-bold mb-3">Quick Navigation</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="#specialties">Specialties</a></li>
+          <li><a href="#doctors">Doctors Team</a></li>
+          <li><a href="#ai">AI Finder</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-white fw-bold mb-3">Clinic Support</h6>
+        <p class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i> CarePoint Central Medical Hub</p>
+        <p class="mb-1"><i class="bi bi-telephone-fill text-primary me-2"></i> +1 (800) 555-CARE</p>
+        <p class="small text-muted mt-3">© 2026 CarePoint Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal fade" id="authModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-3">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="fw-bold fs-4">Account Access</h5>
+        <button class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Email Address</label>
+            <input type="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Password</label>
+            <input type="password" class="form-control" required>
+          </div>
+          <button class="btn-main w-100 py-3">Login to Portal</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- REGISTER MODAL -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-3">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="fw-bold fs-4">Create Account</h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <!-- Role Selector Tabs/Radios -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Register As</label>
+            <div class="btn-group w-100" role="group">
+              <input type="radio" class="btn-check" name="regRole" id="regPatient" autocomplete="off" checked>
+              <label class="btn btn-outline-primary" for="regPatient">Patient</label>
+
+              <input type="radio" class="btn-check" name="regRole" id="regDoctor" autocomplete="off">
+              <label class="btn btn-outline-primary" for="regDoctor">Doctor</label>
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Full Name</label>
+            <input type="text" class="form-control" placeholder="Enter your full name" required>
+          </div>
+
+          <!-- Email Address -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Email Address</label>
+            <input type="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Phone Number</label>
+            <input type="tel" class="form-control" placeholder="+1 (555) 000-0000" required>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Password</label>
+            <input type="password" class="form-control" placeholder="Create a secure password" minlength="6" required>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-main w-100 py-3">Complete Registration</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="bookingModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-3">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="fw-bold fs-4">Schedule Consultation</h5>
+        <button class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Consultation Date</label>
+            <input type="date" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Available Time Slot</label>
+            <select class="form-select" required>
+              <option value="">Select Time</option>
+              <option>10:00 AM</option>
+              <option>11:30 AM</option>
+              <option>04:00 PM</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Medical Reason / Symptoms</label>
+            <textarea class="form-control" rows="3" placeholder="Explain your medical symptoms..." required></textarea>
+          </div>
+          <button class="btn-main w-100 py-3">Confirm Appointment Booking</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function showTextarea() {
+  const selected = document.getElementById("options").value;
+
+  document.getElementById("otherField").style.display =
+    selected === "Others" ? "block" : "none";
+}
+</script>
+</body>
+</html>
